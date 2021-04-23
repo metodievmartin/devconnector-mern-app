@@ -9,7 +9,7 @@ const auth = require('../../middleware/auth');
 const User = require('../../models/User');
 
 // @route   GET api/auth
-// @desc    Test route
+// @desc    Get register user details
 // @access  Public
 router.get('/', auth, async (req, res) => {
     try {
@@ -22,7 +22,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 // @route   POST api/users
-// @desc    Register user
+// @desc    Login user
 // @access  Public
 router.post('/', [
     check(
