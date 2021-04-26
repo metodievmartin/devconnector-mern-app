@@ -1,7 +1,7 @@
 import {Fragment, useState} from "react";
 import {Link} from "react-router-dom";
 
-const Login = (props) => {
+const Login = () => {
     const [formData, setFormData] = useState({
         email: '',
         password: '',
