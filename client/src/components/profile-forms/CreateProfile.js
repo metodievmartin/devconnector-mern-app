@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
+import { useHistory } from "react-router-dom";
 import {connect} from "react-redux";
 import {Fragment, useState} from "react";
+import {createProfile} from "../../actions/profile";
 
-const CreateProfile = (props) => {
+const CreateProfile = ({createProfile}) => {
+    const history = useHistory();
     const [formData, setFormData] = useState({
         company: '',
         website: '',
@@ -42,6 +45,11 @@ const CreateProfile = (props) => {
         });
     };
 
+    const onSubmit = e => {
+        e.preventDefault();
+        createProfile(formData, history)
+    }
+
     return (
         <Fragment>
             <h1 className="large text-primary">
@@ -52,7 +60,7 @@ const CreateProfile = (props) => {
                                              profile stand out
             </p>
             <small>* = required field</small>
-            <form className="form">
+            <form onSubmit={e => onSubmit(e)} className="form">
                 <div className="form-group">
                     <select name="status" value={status} onChange={e => onChange(e)}>
                         <option value="0">* Select Professional Status</option>
@@ -75,7 +83,7 @@ const CreateProfile = (props) => {
                         placeholder="Company"
                         name="company"
                         value={company}
-                        {e => onChange(e)}
+                        onChange={e => onChange(e)}
                     />
                     <small className="form-text"
                     >Could be your own company or one you work for</small
@@ -87,7 +95,7 @@ const CreateProfile = (props) => {
                         placeholder="Website"
                         name="website"
                         value={website}
-                        {e => onChange(e)}
+                        onChange={e => onChange(e)}
                     />
                     <small className="form-text"
                     >Could be your own or a company website</small
@@ -99,7 +107,7 @@ const CreateProfile = (props) => {
                         placeholder="Location"
                         name="location"
                         value={location}
-                        {e => onChange(e)}
+                        onChange={e => onChange(e)}
                     />
                     <small className="form-text"
                     >City & state suggested (eg. Boston, MA)</small
@@ -111,7 +119,8 @@ const CreateProfile = (props) => {
                         placeholder="* Skills"
                         name="skills"
                         value={skills}
-                        {e => onChange(e)}/>
+                        onChange={e => onChange(e)}
+                    />
                     <small className="form-text"
                     >Please use comma separated values (eg.
                      HTML,CSS,JavaScript,PHP)</small
@@ -123,7 +132,7 @@ const CreateProfile = (props) => {
                         placeholder="Github Username"
                         name="githubusername"
                         value={githubusername}
-                        {e => onChange(e)}
+                        onChange={e => onChange(e)}
                     />
                     <small className="form-text"
                     >If you want your latest repos and a Github link, include your
@@ -135,7 +144,7 @@ const CreateProfile = (props) => {
                         placeholder="A short bio of yourself"
                         name="bio"
                         value={bio}
-                        {e => onChange(e)}
+                        onChange={e => onChange(e)}
                     />
                     <small className="form-text">Tell us a little about yourself</small>
                 </div>
@@ -157,7 +166,7 @@ const CreateProfile = (props) => {
                                 placeholder="Twitter URL"
                                 name="twitter"
                                 value={twitter}
-                                {e => onChange(e)}
+                                onChange={e => onChange(e)}
                             />
                         </div>
 
@@ -168,7 +177,7 @@ const CreateProfile = (props) => {
                                 placeholder="Facebook URL"
                                 name="facebook"
                                 value={facebook}
-                                {e => onChange(e)}
+                                onChange={e => onChange(e)}
                             />
                         </div>
 
@@ -179,7 +188,7 @@ const CreateProfile = (props) => {
                                 placeholder="YouTube URL"
                                 name="youtube"
                                 value={youtube}
-                                {e => onChange(e)}
+                                onChange={e => onChange(e)}
                             />
                         </div>
 
@@ -190,7 +199,7 @@ const CreateProfile = (props) => {
                                 placeholder="Linkedin URL"
                                 name="linkedin"
                                 value={linkedin}
-                                {e => onChange(e)}
+                                onChange={e => onChange(e)}
                             />
                         </div>
 
@@ -201,7 +210,7 @@ const CreateProfile = (props) => {
                                 placeholder="Instagram URL"
                                 name="instagram"
                                 value={instagram}
-                                {e => onChange(e)}
+                                onChange={e => onChange(e)}
                             />
                         </div>
                     </Fragment>
@@ -214,6 +223,8 @@ const CreateProfile = (props) => {
     );
 };
 
-CreateProfile.propTypes = {};
+CreateProfile.propTypes = {
+    createProfile: PropTypes.func.isRequired
+};
 
-export default CreateProfile;
+export default connect(null, {createProfile})(CreateProfile);
