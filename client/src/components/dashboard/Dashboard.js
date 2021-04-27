@@ -1,15 +1,43 @@
 import PropTypes from "prop-types";
+import {Fragment} from "react";
 import {connect} from "react-redux";
 import {getCurrentProfile} from "../../actions/profile";
 import {useEffect} from "react";
+import Spinner from "../layout/Spinner";
+import {Link} from "react-router-dom";
 
-const Dashboard = ({auth, profile, getCurrentProfile}) => {
+const Dashboard = (
+    {
+        auth: {user},
+        profile: {profile, loading},
+        getCurrentProfile
+    }
+) => {
     useEffect(() => {
         getCurrentProfile();
     }, []);
 
     return (
-        <div>Dashboard</div>
+        loading && profile === null
+            ? (<Spinner/>)
+            : (
+                <Fragment>
+                    <h1 className="large text-primary">
+                        Dashboard
+                    </h1>
+                    <p className="lead"><i className="fas fa-user"/> Welcome {user && user.name}</p>
+                    {profile !== null ? (
+                        <Fragment>has</Fragment>
+                    ) : (
+                        <Fragment>
+                            <p>You have not yet setup a profile, please add some info</p>
+                            <Link to='/create-profile' className='btn btn-primary m-1'>
+                                Create profile
+                            </Link>
+                        </Fragment>
+                    )}
+                </Fragment>
+            )
     );
 };
 
@@ -24,4 +52,4 @@ const mapStateToProps = state => ({
     profile: state.profile
 });
 
-export default connect(mapStateToProps,{getCurrentProfile})(Dashboard);
+export default connect(mapStateToProps, {getCurrentProfile})(Dashboard);

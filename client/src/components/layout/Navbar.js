@@ -13,6 +13,12 @@ const Navbar = ({auth, logout}) => {
                 <Link to="/profiles">Developers</Link>
             </li>
             <li>
+                <Link to="/dashboard">
+                    <i className="fas fa-user"/>{' '}
+                    <span className="hide-sm">Dashboard</span>
+                </Link>
+            </li>
+            <li>
                 <a onClick={logout} href="javascript:void(0)">
                     <i className="fas fa-sign-out-alt"/>{' '}
                     <span className="hide-sm">Logout</span>
