@@ -7,6 +7,11 @@ import {logout} from "../../actions/auth";
 const Navbar = ({auth, logout}) => {
     const {isAuthenticated, loading} = auth;
 
+    const onLogout = e => {
+        e.preventDefault();
+        logout();
+    };
+
     const authLinks = (
         <ul>
             <li>
@@ -19,7 +24,7 @@ const Navbar = ({auth, logout}) => {
                 </Link>
             </li>
             <li>
-                <a onClick={logout} href="javascript:void(0)">
+                <a onClick={onLogout} href="">
                     <i className="fas fa-sign-out-alt"/>{' '}
                     <span className="hide-sm">Logout</span>
                 </a>
