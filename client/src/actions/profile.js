@@ -33,7 +33,8 @@ export const createProfile = (formData, history, edit = false) => async dispatch
             }
         };
 
-        const res = await axios.post('/api/profile', formData, config);
+        const body = JSON.stringify(formData)
+        const res = await axios.post('/api/profile', body, config);
 
         dispatch({
             type: GET_PROFILE,
@@ -50,8 +51,6 @@ export const createProfile = (formData, history, edit = false) => async dispatch
             history.push('/dashboard');
         }
 
-
-
     } catch (err) {
         const errors = err.response.data.errors;
 
@@ -63,6 +62,5 @@ export const createProfile = (formData, history, edit = false) => async dispatch
             type: PROFILE_ERROR,
             payload: {msg: err.response.statusText, status: err.response.status}
         });
-
     }
-}
+};

@@ -93,10 +93,10 @@ router.post('/', [
 
         if (profile) {
             // Update if existing
-            profile = await Profile.findByIdAndUpdate(
+            profile = await Profile.findOneAndUpdate(
                 {user: req.user.id},
                 {$set: profileFields},
-                {new: true}
+                {new: true, upsert: true, setDefaultsOnInsert: true}
             );
 
             return res.json(profile);
