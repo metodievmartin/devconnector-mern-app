@@ -6,6 +6,9 @@ import Spinner from "../layout/Spinner";
 import {Link} from "react-router-dom";
 import ProfileTop from "./ProfileTop";
 import ProfileAbout from "./ProfileAbout";
+import ProfileExperienceItem from "./ProfileExperienceItem";
+import ProfileEducationItem from "./ProfileEducationItem";
+import ProfileGithub from "./ProfileGithub";
 
 const Profile = (
     {
@@ -27,6 +30,22 @@ const Profile = (
             </Link>
         );
 
+    const experiencesList = (
+        <Fragment>
+            {profile?.experience.map(experience => (
+                <ProfileExperienceItem key={experience._id} experience={experience}/>
+            ))}
+        </Fragment>
+    );
+
+    const educationList = (
+        <Fragment>
+            {profile?.education.map(education => (
+                <ProfileEducationItem key={education._id} education={education}/>
+            ))}
+        </Fragment>
+    );
+
     return (
         <Fragment>
             {profile === null || loading
@@ -39,8 +58,22 @@ const Profile = (
                         editProfileLink
                     }
                     <div className="profile-grid my-1">
-                        <ProfileTop profile={profile} />
-                        <ProfileAbout profile={profile} />
+                        <ProfileTop profile={profile}/>
+                        <ProfileAbout profile={profile}/>
+                        <div className="profile-exp bg-white p-2">
+                            <h2 className="text-primary">Experience</h2>
+                            {profile.experience.length > 0
+                                ? experiencesList
+                                : <h4>No experience credentials yet...</h4>}
+                        </div>
+                        <div className="profile-edu bg-white p-2">
+                            <h2 className="text-primary">Education</h2>
+                            {profile.education.length > 0
+                                ? educationList
+                                : <h4>No education credentials yet...</h4>}
+                        </div>
+                        {profile.githubusername &&
+                            <ProfileGithub username={profile.githubusername}/>}
                     </div>
                 </Fragment>
             }
