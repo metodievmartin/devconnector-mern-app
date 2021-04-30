@@ -1,4 +1,3 @@
-import {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import Moment from "react-moment";
 import {connect} from "react-redux";
@@ -26,7 +25,7 @@ const PostItem = (
     return (
         <div className="post bg-white p-1 my-1">
             <div>
-                <Link to="/profile">
+                <Link to={`/profiles/${user}`}>
                     <img
                         className="round-img"
                         src={avatar}
