@@ -5,8 +5,7 @@ import {Link, Redirect} from "react-router-dom";
 import {login} from "../../actions/auth";
 import Spinner from "../layout/Spinner";
 
-const Login = ({login, isAuthenticated}) => {
-    const [pageLoading, setPageLoading] = useState(false);
+const Login = ({login, isAuthenticated, isLoading}) => {
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -20,7 +19,6 @@ const Login = ({login, isAuthenticated}) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        setPageLoading(true);
         login(email, password);
     };
 
@@ -59,7 +57,7 @@ const Login = ({login, isAuthenticated}) => {
         <Fragment>
             <h1 className="large text-primary">Login</h1>
             <p className="lead"><i className="fas fa-user"/> Log Into Your Account</p>
-            {pageLoading
+            {isLoading
                 ? <Spinner/>
                 : loginForm}
             <p className="my-1">
@@ -71,11 +69,13 @@ const Login = ({login, isAuthenticated}) => {
 
 Login.propTypes = {
     login: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool
+    isAuthenticated: PropTypes.bool,
+    isLoading: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    isLoading: state.auth.loading,
 });
 
 export default connect(mapStateToProps, {login})(Login);

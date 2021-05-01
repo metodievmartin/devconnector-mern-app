@@ -6,8 +6,7 @@ import {register} from "../../actions/auth";
 import PropTypes from "prop-types";
 import Spinner from "../layout/Spinner";
 
-const Register = ({setAlert, register, isAuthenticated}) => {
-    const [pageLoading, setPageLoading] = useState(false);
+const Register = ({setAlert, register, isAuthenticated, isLoading}) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -26,7 +25,6 @@ const Register = ({setAlert, register, isAuthenticated}) => {
         if (password !== password2) {
             setAlert('Passwords don\'t match', 'danger');
         } else {
-            setPageLoading(true);
            register({name, email, password});
         }
     };
@@ -89,7 +87,7 @@ const Register = ({setAlert, register, isAuthenticated}) => {
         <Fragment>
             <h1 className="large text-primary">Sign Up</h1>
             <p className="lead"><i className="fas fa-user"/> Create Your Account</p>
-            {pageLoading
+            {isLoading
                 ? <Spinner/>
                 : registerForm}
             <p className="my-1">
@@ -102,11 +100,13 @@ const Register = ({setAlert, register, isAuthenticated}) => {
 Register.propTypes = {
     setAlert: PropTypes.func.isRequired,
     register: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool
+    isAuthenticated: PropTypes.bool,
+    isLoading: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    isLoading: state.auth.loading,
 });
 
 export default connect(mapStateToProps, {setAlert, register})(Register);

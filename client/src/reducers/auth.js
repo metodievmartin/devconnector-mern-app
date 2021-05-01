@@ -4,7 +4,7 @@ import {
     USER_LOADED,
     AUTH_ERROR,
     LOGIN_SUCCESS,
-    LOGIN_FAIL, LOGOUT, DELETE_ACCOUNT
+    LOGIN_FAIL, LOGOUT, DELETE_ACCOUNT, SET_LOADING
 } from "../actions/types";
 
 const initialState = {
@@ -18,6 +18,11 @@ export default function auth(state = initialState, action) {
     const {type, payload} = action;
 
     switch (type) {
+        case SET_LOADING:
+            return {
+                ...state,
+                loading: true
+            };
         case USER_LOADED:
             return {
                 ...state,
