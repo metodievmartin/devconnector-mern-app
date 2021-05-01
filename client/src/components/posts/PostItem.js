@@ -2,7 +2,7 @@ import {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import Moment from "react-moment";
 import {connect} from "react-redux";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {addLike, deletePost, removeLike} from "../../actions/post";
 
 const PostItem = (
@@ -24,6 +24,13 @@ const PostItem = (
         }
     }
 ) => {
+    const history = useHistory();
+
+    const onDeletePost = () => {
+        deletePost(_id);
+        history.push('/posts');
+    };
+
     return (
         <div className="post bg-white p-1 my-1">
             <div>
@@ -60,12 +67,12 @@ const PostItem = (
                                 <span className='comment-count'>{comments.length}</span>
                             )}
                         </Link>
-                        {!auth.loading && user === auth.user._id && (
-                            <button onClick={() => deletePost(_id)} type="button" className="btn btn-danger">
-                                <i className="fas fa-times"/>
-                            </button>
-                        )}
                     </Fragment>
+                )}
+                {!auth.loading && user === auth.user._id && (
+                    <button onClick={onDeletePost} type="button" className="btn btn-danger">
+                        <i className="fas fa-times"/>
+                    </button>
                 )}
             </div>
         </div>
