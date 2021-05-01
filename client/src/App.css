@@ -141,7 +141,7 @@ img {
 
 .badge {
   font-size: 0.8rem;
-  padding: 0.1rem;
+  padding: 0.2rem 0.4rem;
   text-align: center;
   margin: 0.3rem;
   background: var(--light-color);
@@ -175,7 +175,8 @@ img {
 .btn-dark,
 .bg-dark,
 .badge-dark,
-.alert-dark {
+.alert-dark,
+.logout-btn {
   background: var(--dark-color);
   color: #fff;
 }
@@ -328,6 +329,17 @@ button {
 
 .navbar .welcome span {
   margin-right: 0.6rem;
+}
+
+.logout-btn {
+  border: none;
+  outline: none;
+  margin: 0 0.6rem;
+}
+
+.logout-btn:hover {
+  cursor: pointer;
+  color: var(--primary-color);
 }
 
 /* Landing Page */

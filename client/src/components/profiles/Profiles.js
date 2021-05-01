@@ -8,7 +8,7 @@ import ProfileItem from "./ProfileItem";
 const Profiles = ({getProfiles, profile: {profiles, loading}}) => {
     useEffect(()=> {
         getProfiles();
-    }, []);
+    }, [getProfiles]);
 
     const allProfiles = profiles.length > 0
         ? (profiles.map(profile => <ProfileItem key={profile._id} profile={profile} />))

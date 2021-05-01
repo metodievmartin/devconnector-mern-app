@@ -27,10 +27,10 @@ const Navbar = ({auth, logout}) => {
                 </Link>
             </li>
             <li>
-                <a onClick={onLogout} href="#">
+                <button onClick={onLogout} className="logout-btn" >
                     <i className="fas fa-sign-out-alt"/>{' '}
                     <span className="hide-sm">Logout</span>
-                </a>
+                </button>
             </li>
         </ul>
     );

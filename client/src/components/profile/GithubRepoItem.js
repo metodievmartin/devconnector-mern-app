@@ -32,7 +32,7 @@ const GithubRepoItem = ({repo}) => {
 };
 
 GithubRepoItem.propTypes = {
-    repo: PropTypes.array.isRequired,
+    repo: PropTypes.object.isRequired,
 };
 
 export default GithubRepoItem;
