@@ -342,16 +342,15 @@ router.get('/github/:username', async (req, res) => {
             `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc`
         );
 
-        console.log(config);
         const headers = {
             'user-agent': 'node.js',
-            Authorization: `token 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`
+            Authorization: `token ${config.get('githubToken')}`
         };
 
         const gitHubResponse = await axios.get(uri, { headers });
         return res.json(gitHubResponse.data);
     } catch (err) {
-        console.error(err.message);
+        console.log(err.message);
         return res.status(404).json({ msg: 'No Github profile found' });
     }
 });
