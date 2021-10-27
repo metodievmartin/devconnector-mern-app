@@ -1,11 +1,16 @@
 const express = require('express');
+const dotenv = require('dotenv');
 const connectDB = require('./config/db')
 const path = require('path');
+
+// Set ENV variables from config.env
+dotenv.config({ path: './config.env' });
 
 const app = express();
 
 // Connect to the DataBase
-connectDB();
+const db = process.env.MONGO_URI;
+connectDB(db);
 
 // Initialize middleware
 app.use(express.json({extended: false}));
